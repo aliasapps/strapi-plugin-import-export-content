@@ -34,20 +34,21 @@ function App() {
   const userContentTypes = useContentTypes();
 
   return (
-    <Layout navLinks={navLinks}>
-      <Switch>
-        {/* <Route path={pathTo("import")}>
-          <ImportPage contentTypes={userContentTypes} />
-        </Route> */}
-        <Route path={pathTo("export")}>
-          <ExportPage contentTypes={userContentTypes} />
-        </Route>
-        {/* <Route> */}
-        {/* Default Route Retur to Import Page */}
-        {/* <Redirect to={pathTo("import")} /> */}
-        {/* </Route> */}
-      </Switch>
-    </Layout>
+    <ExportPage contentTypes={userContentTypes} />
+    // <Layout navLinks={navLinks}>
+    //   <Switch>
+    //     {/* <Route path={pathTo("import")}>
+    //       <ImportPage contentTypes={userContentTypes} />
+    //     </Route> */}
+    //     <Route path={pathTo("export")}>
+
+    //     </Route>
+    //     {/* <Route> */}
+    //     {/* Default Route Retur to Import Page */}
+    //     {/* <Redirect to={pathTo("import")} /> */}
+    //     {/* </Route> */}
+    //   </Switch>
+    // </Layout>
   );
 }
 
