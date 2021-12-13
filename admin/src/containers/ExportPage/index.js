@@ -36,19 +36,26 @@ function ImportPage({ contentTypes }) {
   const sourceOptions = useMemo(
     () =>
       [{ label: "Select Export Source", value: "" }].concat(
-        contentTypes.filter(
-          ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
-        )
+        contentTypes.map(({ uid, info, apiID }) => ({
+          label: info.label || apiID,
+          value: uid,
+        }))
       ),
-
-    // (
-    //   contentTypes.map(({ uid, info, apiID }) => ({
-    //     label: info.label || apiID,
-    //     value: uid,
-    //   }))
-    // ),
     [contentTypes]
   );
+
+  (() => {
+    const map = contentTypes.map(({ uid, info, apiID }) => ({
+      label: info.label || apiID,
+      value: uid,
+    }));
+
+    const filter = contentTypes.filter(
+      ({ uid, info, apiID }) => (info.label = "Questionnaire Responses")
+    );
+
+    console.log({ map, filter });
+  })();
 
   // Source Options Handler
   const handleSelectSourceExports = ({ target: { value } }) => {
