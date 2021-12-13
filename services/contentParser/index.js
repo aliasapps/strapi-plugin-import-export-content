@@ -21,13 +21,14 @@ function getContentFromItems({ items, type }) {
   switch (type) {
     case "text/csv":
     case "application/vnd.ms-excel": {
-      const mappedItems = toArray(items);
+      const items = toArray(items);
+      const mappedItems = items.length > 0 ? items[0].Responses : [];
 
       // const headers = getFieldsFromItems(mappedItems);
       const headers = getFieldsFromItems(mappedItems[0].Responses);
 
-      if (mappedItems.length > 0)
-        console.log({ mappedItems: mappedItems[0].Responses, headers });
+      // if (mappedItems.length > 0)
+      //   console.log({ mappedItems: mappedItems[0].Responses, headers });
 
       const data = mappedItems
         .map((item) => jsonToCsv(item, headers))
