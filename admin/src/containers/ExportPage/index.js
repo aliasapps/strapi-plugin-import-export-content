@@ -51,7 +51,7 @@ function ImportPage({ contentTypes }) {
     }));
 
     const filter = contentTypes.filter(
-      ({ uid, info, apiID }) => (info.label = "Questionnaire Responses")
+      ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
     );
 
     console.log({ map, filter });
