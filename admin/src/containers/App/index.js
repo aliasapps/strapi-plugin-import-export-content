@@ -36,16 +36,16 @@ function App() {
   return (
     <Layout navLinks={navLinks}>
       <Switch>
-        <Route path={pathTo("import")}>
+        {/* <Route path={pathTo("import")}>
           <ImportPage contentTypes={userContentTypes} />
-        </Route>
+        </Route> */}
         <Route path={pathTo("export")}>
           <ExportPage contentTypes={userContentTypes} />
         </Route>
-        <Route>
-          {/* Default Route Retur to Import Page */}
-          <Redirect to={pathTo("import")} />
-        </Route>
+        {/* <Route> */}
+        {/* Default Route Retur to Import Page */}
+        {/* <Redirect to={pathTo("import")} /> */}
+        {/* </Route> */}
       </Switch>
     </Layout>
   );
