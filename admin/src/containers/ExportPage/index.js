@@ -22,85 +22,94 @@ import { FilterIcon } from "strapi-helper-plugin";
 import BASE_OPTIONS from "../../constants/options";
 import OptionsExport from "../../components/OptionsExport";
 
-const exportFormatsOptions = FORMATS.map(({ name, mimeType }) => ({
-  label: name,
-  value: mimeType,
-}));
-// FORMATS.reduce((prev, { name, mimeType }) => {
-//   if (mimeType === "text/csv")
-//     return {
-//       label: name,
-//       value: mimeType,
-//     };
+const exportFormatsOptions =
+  // FORMATS.map(({ name, mimeType }) => ({
+  //   label: name,
+  //   value: mimeType,
+  // }));
+  FORMATS.reduce((prev, { name, mimeType }) => {
+    if (mimeType === "text/csv")
+      return [
+        ...prev,
+        {
+          label: name,
+          value: mimeType,
+        },
+      ];
 
-//   return prev;
-// }, []);
+    return prev;
+  }, []);
 
 function ImportPage({ contentTypes }) {
   const [target, setTarget] = useState(null);
   const [sourceExports, setSourceExports] = useState("");
-  const [exportFormat, setExportFormat] = useState("application/json");
+  const [exportFormat, setExportFormat] = useState("text/csv");
   const [contentToExport, setContentToExport] = useState("");
 
   const sourceOptions = useMemo(
     () =>
-      // contentTypes.reduce(
-      //   (prev, { uid, info, apiID }) => {
-      //     if (info.label === "Questionnaire Responses") {
-      //       return {
-      //         label: info.label || apiID,
-      //         value: uid,
-      //       };
-      //     }
+      contentTypes.reduce(
+        (prev, { uid, info, apiID }) => {
+          if (info.label === "Questionnaire Responses") {
+            return [
+              ...prev,
+              {
+                label: info.label || apiID,
+                value: uid,
+              },
+            ];
+          }
 
-      //     return prev;
-      //   },
-      //   [{ label: "Select Export Source", value: "" }]
-      // )
-      // ,
-      [{ label: "Select Export Source", value: "" }].concat(
-        contentTypes.map(({ uid, info, apiID }) => ({
-          label: info.label || apiID,
-          value: uid,
-        }))
+          return prev;
+        },
+        [{ label: "Select Export Source", value: "" }]
       ),
+    // [{ label: "Select Export Source", value: "" }].concat(
+    //   contentTypes.map(({ uid, info, apiID }) => ({
+    //     label: info.label || apiID,
+    //     value: uid,
+    //   }))
+    // ),
 
     [contentTypes]
   );
 
-  (() => {
-    // const map = contentTypes.map(({ uid, info, apiID }) => ({
-    //   label: info.label || apiID,
-    //   value: uid,
-    // }));
+  // (() => {
+  //   // const map = contentTypes.map(({ uid, info, apiID }) => ({
+  //   //   label: info.label || apiID,
+  //   //   value: uid,
+  //   // }));
 
-    // const filter = contentTypes.filter(
-    //   ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
-    // );
+  //   // const filter = contentTypes.filter(
+  //   //   ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
+  //   // );
 
-    const reduce = contentTypes.reduce(
-      (prev, { uid, info, apiID }) => {
-        if (info.label === "Questionnaire Responses") {
-          return {
-            label: info.label || apiID,
-            value: uid,
-          };
-        }
+  //   const reduce = contentTypes.reduce(
+  //     (prev, { uid, info, apiID }) => {
+  //       if (info.label === "Questionnaire Responses") {
+  //         return [
+  //           ...prev,
+  //           {
+  //             label: info.label || apiID,
+  //             value: uid,
+  //           },
+  //         ];
+  //       }
 
-        return prev;
-      },
-      [{ label: "Select Export Source", value: "" }]
-    );
+  //       return prev;
+  //     },
+  //     [{ label: "Select Export Source", value: "" }]
+  //   );
 
-    const map = [{ label: "Select Export Source", value: "" }].concat(
-      contentTypes.map(({ uid, info, apiID }) => ({
-        label: info.label || apiID,
-        value: uid,
-      }))
-    );
+  //   const map = [{ label: "Select Export Source", value: "" }].concat(
+  //     contentTypes.map(({ uid, info, apiID }) => ({
+  //       label: info.label || apiID,
+  //       value: uid,
+  //     }))
+  //   );
 
-    console.log({ reduce, map });
-  })();
+  //   console.log({ reduce, map });
+  // })();
 
   // Source Options Handler
   const handleSelectSourceExports = ({ target: { value } }) => {
