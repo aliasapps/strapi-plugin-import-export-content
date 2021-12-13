@@ -4,7 +4,7 @@
   "description": "This is a plugin for import and export content of collection types.",
   "license": "MIT",
   "strapi": {
-    "name": "Import / Export Content",
+    "name": "Export Questionnaire Responses",
     "icon": "sync-alt",
     "description": "Import and Export your Content"
   },
