@@ -89,7 +89,7 @@ function ImportPage({ contentTypes }) {
         body: { target, type: exportFormat, options },
       });
 
-      console.log(data);
+      console.log(data, target);
 
       setContentToExport(data);
     } catch (error) {
