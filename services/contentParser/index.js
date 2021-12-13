@@ -21,8 +21,9 @@ function getContentFromItems({ items, type }) {
   switch (type) {
     case "text/csv":
     case "application/vnd.ms-excel": {
-      const items = toArray(items);
-      const mappedItems = items.length > 0 ? items[0].Responses : [];
+      const itemsToArray = toArray(items);
+      const mappedItems =
+        itemsToArray.length > 0 ? itemsToArray[0].Responses : [];
 
       // const headers = getFieldsFromItems(mappedItems);
       const headers = getFieldsFromItems(mappedItems[0].Responses);
