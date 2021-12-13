@@ -20,10 +20,10 @@ import "../../assets/prismjs.css";
 
 const pathTo = (uri = "") => `/plugins/${pluginId}/${uri}`;
 const navLinks = [
-  {
-    name: "Import Data",
-    to: pathTo("import"),
-  },
+  // {
+  //   name: "Import Data",
+  //   to: pathTo("import"),
+  // },
   {
     name: "Export Data",
     to: pathTo("export"),

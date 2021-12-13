@@ -36,11 +36,17 @@ function ImportPage({ contentTypes }) {
   const sourceOptions = useMemo(
     () =>
       [{ label: "Select Export Source", value: "" }].concat(
-        contentTypes.map(({ uid, info, apiID }) => ({
-          label: info.label || apiID,
-          value: uid,
-        }))
+        contentTypes.filter(
+          ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
+        )
       ),
+
+    // (
+    //   contentTypes.map(({ uid, info, apiID }) => ({
+    //     label: info.label || apiID,
+    //     value: uid,
+    //   }))
+    // ),
     [contentTypes]
   );
 
