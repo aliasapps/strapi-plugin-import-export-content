@@ -6,29 +6,29 @@
  */
 
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import Layout from "../../components/Layout";
+// import { Redirect, Route, Switch } from "react-router-dom";
+// import Layout from "../../components/Layout";
 // Utils
-import pluginId from "../../pluginId";
+// import pluginId from "../../pluginId";
 // Pages
-import ImportPage from "../ImportPage";
+// import ImportPage from "../ImportPage";
 import ExportPage from "../ExportPage";
 
 import useContentTypes from "../../hooks/useContentTypes";
 
 import "../../assets/prismjs.css";
 
-const pathTo = (uri = "") => `/plugins/${pluginId}/${uri}`;
-const navLinks = [
-  // {
-  //   name: "Import Data",
-  //   to: pathTo("import"),
-  // },
-  {
-    name: "Export Data",
-    to: pathTo("export"),
-  },
-];
+// const pathTo = (uri = "") => `/plugins/${pluginId}/${uri}`;
+// const navLinks = [
+//   // {
+//   //   name: "Import Data",
+//   //   to: pathTo("import"),
+//   // },
+//   {
+//     name: "Export Data",
+//     to: pathTo("export"),
+//   },
+// ];
 
 function App() {
   const userContentTypes = useContentTypes();

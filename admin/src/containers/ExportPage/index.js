@@ -41,6 +41,8 @@ function ImportPage({ contentTypes }) {
   const [exportFormat, setExportFormat] = useState("text/csv");
   const [contentToExport, setContentToExport] = useState("");
 
+  console.log(contentTypes);
+
   const sourceOptions = useMemo(
     () =>
       contentTypes.reduce(
