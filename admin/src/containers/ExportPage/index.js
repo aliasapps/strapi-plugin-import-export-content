@@ -22,20 +22,19 @@ import { FilterIcon } from "strapi-helper-plugin";
 import BASE_OPTIONS from "../../constants/options";
 import OptionsExport from "../../components/OptionsExport";
 
-const exportFormatsOptions =
-  // FORMATS.map(({ name, mimeType }) => ({
-  //   label: name,
-  //   value: mimeType,
-  // }));
-  FORMATS.reduce((prev, { name, mimeType }) => {
-    if (mimeType === "text/csv")
-      return {
-        label: name,
-        value: mimeType,
-      };
+const exportFormatsOptions = FORMATS.map(({ name, mimeType }) => ({
+  label: name,
+  value: mimeType,
+}));
+// FORMATS.reduce((prev, { name, mimeType }) => {
+//   if (mimeType === "text/csv")
+//     return {
+//       label: name,
+//       value: mimeType,
+//     };
 
-    return prev;
-  }, []);
+//   return prev;
+// }, []);
 
 function ImportPage({ contentTypes }) {
   const [target, setTarget] = useState(null);
@@ -45,39 +44,53 @@ function ImportPage({ contentTypes }) {
 
   const sourceOptions = useMemo(
     () =>
-      // [{ label: "Select Export Source", value: "" }].concat(
-      //   contentTypes.map(({ uid, info, apiID }) => ({
-      //     label: info.label || apiID,
-      //     value: uid,
-      //   }))
-      // ),
-      contentTypes.reduce(
-        (prev, { uid, info, apiID }) => {
-          if (info.label === "Questionnaire Response") {
-            return {
-              label: info.label || apiID,
-              value: uid,
-            };
-          }
+      [{ label: "Select Export Source", value: "" }].concat(
+        contentTypes.map(({ uid, info, apiID }) => ({
+          label: info.label || apiID,
+          value: uid,
+        }))
+        // ),
+        // contentTypes.reduce(
+        //   (prev, { uid, info, apiID }) => {
+        //     if (info.label === "Questionnaire Response") {
+        //       return {
+        //         label: info.label || apiID,
+        //         value: uid,
+        //       };
+        //     }
 
-          return prev;
-        },
-        [{ label: "Select Export Source", value: "" }]
+        //     return prev;
+        //   },
+        //   [{ label: "Select Export Source", value: "" }]
       )[contentTypes]
   );
 
-  // (() => {
-  //   const map = contentTypes.map(({ uid, info, apiID }) => ({
-  //     label: info.label || apiID,
-  //     value: uid,
-  //   }));
+  (() => {
+    const map = contentTypes.map(({ uid, info, apiID }) => ({
+      label: info.label || apiID,
+      value: uid,
+    }));
 
-  //   const filter = contentTypes.filter(
-  //     ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
-  //   );
+    const filter = contentTypes.filter(
+      ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
+    );
 
-  //   console.log({ map, filter });
-  // })();
+    contentTypes.reduce(
+      (prev, { uid, info, apiID }) => {
+        if (info.label === "Questionnaire Response") {
+          return {
+            label: info.label || apiID,
+            value: uid,
+          };
+        }
+
+        return prev;
+      },
+      [{ label: "Select Export Source", value: "" }]
+    );
+
+    console.log({ map, filter, reduce });
+  })();
 
   // Source Options Handler
   const handleSelectSourceExports = ({ target: { value } }) => {
