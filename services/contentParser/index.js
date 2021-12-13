@@ -25,7 +25,8 @@ function getContentFromItems({ items, type }) {
 
       const headers = getFieldsFromItems(mappedItems);
 
-      console.log({ mappedItems: mappedItems?.[0], headers });
+      if (mappedItems.length > 0)
+        console.log({ mappedItems: mappedItems[0], headers });
 
       const data = mappedItems
         .map((item) => jsonToCsv(item, headers))
