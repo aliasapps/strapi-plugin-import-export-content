@@ -23,16 +23,16 @@ import BASE_OPTIONS from "../../constants/options";
 import OptionsExport from "../../components/OptionsExport";
 
 const exportFormatsOptions = FORMATS.reduce((prev, { name, mimeType }) => {
-  if (mimeType === "text/csv")
-    return [
-      ...prev,
-      {
-        label: name,
-        value: mimeType,
-      },
-    ];
+  // if (mimeType === "text/csv")
+  return [
+    ...prev,
+    {
+      label: name,
+      value: mimeType,
+    },
+  ];
 
-  return prev;
+  // return prev;
 }, []);
 
 function ImportPage({ contentTypes }) {
@@ -108,7 +108,7 @@ function ImportPage({ contentTypes }) {
         body: { target, type: exportFormat, options },
       });
 
-      console.log(JSON.parse(data));
+      console.log(data);
 
       setContentToExport(data);
     } catch (error) {
