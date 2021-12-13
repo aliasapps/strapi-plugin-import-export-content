@@ -75,7 +75,7 @@ function ImportPage({ contentTypes }) {
       ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
     );
 
-    contentTypes.reduce(
+    const reduce = contentTypes.reduce(
       (prev, { uid, info, apiID }) => {
         if (info.label === "Questionnaire Response") {
           return {
