@@ -23,6 +23,7 @@ function getContentFromItems({ items, type }) {
     case "application/vnd.ms-excel": {
       const mappedItems = toArray(items);
       const headers = getFieldsFromItems(mappedItems);
+      console.log({ mappedItems, headers });
       const data = mappedItems
         .map((item) => jsonToCsv(item, headers))
         .join("\n");
