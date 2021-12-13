@@ -44,12 +44,6 @@ function ImportPage({ contentTypes }) {
 
   const sourceOptions = useMemo(
     () =>
-      // [{ label: "Select Export Source", value: "" }].concat(
-      //   contentTypes.map(({ uid, info, apiID }) => ({
-      //     label: info.label || apiID,
-      //     value: uid,
-      //   }))
-      // ),
       contentTypes.reduce(
         (prev, { uid, info, apiID }) => {
           if (info.label === "Questionnaire Responses") {
@@ -63,6 +57,24 @@ function ImportPage({ contentTypes }) {
         },
         [{ label: "Select Export Source", value: "" }]
       ),
+    // [{ label: "Select Export Source", value: "" }].concat(
+    //   contentTypes.map(({ uid, info, apiID }) => ({
+    //     label: info.label || apiID,
+    //     value: uid,
+    //   }))
+    // ),
+    // contentTypes.reduce(
+    //   (prev, { uid, info, apiID }) => {
+    //     if (info.label === "Questionnaire Response") {
+    //       return {
+    //         label: info.label || apiID,
+    //         value: uid,
+    //       };
+    //     }
+
+    //     return prev;
+    //   },
+    //   [{ label: "Select Export Source", value: "" }]
     [contentTypes]
   );
 
