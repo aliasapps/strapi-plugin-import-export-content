@@ -23,15 +23,20 @@ function getContentFromItems({ items, type }) {
     case "application/vnd.ms-excel": {
       const mappedItems = toArray(items);
 
+      let responses =
+        mappedItems.length > 0 && mappedItems[0].Responses.length > 0
+          ? mappedItems[0].Responses
+          : [];
+
       // const headers = getFieldsFromItems(mappedItems);
       const headers = getFieldsFromItems(mappedItems[0].Responses);
 
       if (mappedItems.length > 0)
         console.log({ items, mappedItems: mappedItems[0].Responses, headers });
 
-      const data = mappedItems
-        .map((item) => jsonToCsv(item, headers))
-        .join("\n");
+      const data =
+        // mappedItems
+        responses.map((item) => jsonToCsv(item, headers)).join("\n");
 
       return `${headers.join()}\n${data}`;
     }
