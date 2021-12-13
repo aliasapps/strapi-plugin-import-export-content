@@ -22,9 +22,14 @@ import { FilterIcon } from "strapi-helper-plugin";
 import BASE_OPTIONS from "../../constants/options";
 import OptionsExport from "../../components/OptionsExport";
 
-const exportFormatsOptions = FORMATS.filter(
-  ({ name, mimeType }) => mimeType === "text/csv"
-);
+const exportFormatsOptions = FORMATS.map(({ name, mimeType }) => {
+  if (mimeType === "text/csv") {
+    return {
+      label: name,
+      value: mimeType,
+    };
+  }
+});
 
 function ImportPage({ contentTypes }) {
   const [target, setTarget] = useState(null);
@@ -35,13 +40,14 @@ function ImportPage({ contentTypes }) {
   const sourceOptions = useMemo(
     () =>
       [{ label: "Select Export Source", value: "" }].concat(
-        contentTypes.filter(
-          ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
-        )
-        // contentTypes.map(({ uid, info, apiID }) => ({
-        //   label: info.label || apiID,
-        //   value: uid,
-        // }))
+        contentTypes.map(({ uid, info, apiID }) => {
+          if (info.label === "Questionnaire Responses") {
+            return {
+              label: info.label || apiID,
+              value: uid,
+            };
+          }
+        })
       ),
     [contentTypes]
   );
@@ -125,7 +131,7 @@ function ImportPage({ contentTypes }) {
 
   return (
     <Block
-      title="Export Questionnaire Responses"
+      title="Export"
       description="Configure the Export Source & Format"
       style={{ marginBottom: 12 }}
     >
