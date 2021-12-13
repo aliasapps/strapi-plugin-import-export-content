@@ -89,6 +89,8 @@ function ImportPage({ contentTypes }) {
         body: { target, type: exportFormat, options },
       });
 
+      console.log(data);
+
       setContentToExport(data);
     } catch (error) {
       strapi.notification.toggle({
