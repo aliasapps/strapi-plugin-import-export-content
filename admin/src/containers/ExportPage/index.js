@@ -22,40 +22,42 @@ import { FilterIcon } from "strapi-helper-plugin";
 import BASE_OPTIONS from "../../constants/options";
 import OptionsExport from "../../components/OptionsExport";
 
-const exportFormatsOptions = FORMATS.map(({ name, mimeType }) => ({
-  label: name,
-  value: mimeType,
-}));
+const exportFormatsOptions = FORMATS.filter(
+  ({ name, mimeType }) => mimeType === "text/csv"
+);
 
 function ImportPage({ contentTypes }) {
   const [target, setTarget] = useState(null);
   const [sourceExports, setSourceExports] = useState("");
-  const [exportFormat, setExportFormat] = useState("application/json");
+  const [exportFormat, setExportFormat] = useState("text/csv");
   const [contentToExport, setContentToExport] = useState("");
 
   const sourceOptions = useMemo(
     () =>
       [{ label: "Select Export Source", value: "" }].concat(
-        contentTypes.map(({ uid, info, apiID }) => ({
-          label: info.label || apiID,
-          value: uid,
-        }))
+        contentTypes.filter(
+          ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
+        )
+        // contentTypes.map(({ uid, info, apiID }) => ({
+        //   label: info.label || apiID,
+        //   value: uid,
+        // }))
       ),
     [contentTypes]
   );
 
-  (() => {
-    const map = contentTypes.map(({ uid, info, apiID }) => ({
-      label: info.label || apiID,
-      value: uid,
-    }));
+  // (() => {
+  //   const map = contentTypes.map(({ uid, info, apiID }) => ({
+  //     label: info.label || apiID,
+  //     value: uid,
+  //   }));
 
-    const filter = contentTypes.filter(
-      ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
-    );
+  //   const filter = contentTypes.filter(
+  //     ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
+  //   );
 
-    console.log({ map, filter });
-  })();
+  //   console.log({ map, filter });
+  // })();
 
   // Source Options Handler
   const handleSelectSourceExports = ({ target: { value } }) => {
@@ -123,7 +125,7 @@ function ImportPage({ contentTypes }) {
 
   return (
     <Block
-      title="Export"
+      title="Export Questionnaire Responses"
       description="Configure the Export Source & Format"
       style={{ marginBottom: 12 }}
     >
