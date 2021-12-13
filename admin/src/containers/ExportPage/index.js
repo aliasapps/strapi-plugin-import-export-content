@@ -44,53 +44,54 @@ function ImportPage({ contentTypes }) {
 
   const sourceOptions = useMemo(
     () =>
-      [{ label: "Select Export Source", value: "" }].concat(
-        contentTypes.map(({ uid, info, apiID }) => ({
-          label: info.label || apiID,
-          value: uid,
-        }))
-        // ),
-        // contentTypes.reduce(
-        //   (prev, { uid, info, apiID }) => {
-        //     if (info.label === "Questionnaire Response") {
-        //       return {
-        //         label: info.label || apiID,
-        //         value: uid,
-        //       };
-        //     }
+      // [{ label: "Select Export Source", value: "" }].concat(
+      //   contentTypes.map(({ uid, info, apiID }) => ({
+      //     label: info.label || apiID,
+      //     value: uid,
+      //   }))
+      // ),
+      contentTypes.reduce(
+        (prev, { uid, info, apiID }) => {
+          if (info.label === "Questionnaire Responses") {
+            return {
+              label: info.label || apiID,
+              value: uid,
+            };
+          }
 
-        //     return prev;
-        //   },
-        //   [{ label: "Select Export Source", value: "" }]
-      )[contentTypes]
+          return prev;
+        },
+        [{ label: "Select Export Source", value: "" }]
+      ),
+    [contentTypes]
   );
 
-  (() => {
-    const map = contentTypes.map(({ uid, info, apiID }) => ({
-      label: info.label || apiID,
-      value: uid,
-    }));
+  // (() => {
+  //   const map = contentTypes.map(({ uid, info, apiID }) => ({
+  //     label: info.label || apiID,
+  //     value: uid,
+  //   }));
 
-    const filter = contentTypes.filter(
-      ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
-    );
+  //   const filter = contentTypes.filter(
+  //     ({ uid, info, apiID }) => info.label === "Questionnaire Responses"
+  //   );
 
-    const reduce = contentTypes.reduce(
-      (prev, { uid, info, apiID }) => {
-        if (info.label === "Questionnaire Response") {
-          return {
-            label: info.label || apiID,
-            value: uid,
-          };
-        }
+  //   const reduce = contentTypes.reduce(
+  //     (prev, { uid, info, apiID }) => {
+  //       if (info.label === "Questionnaire Responses") {
+  //         return {
+  //           label: info.label || apiID,
+  //           value: uid,
+  //         };
+  //       }
 
-        return prev;
-      },
-      [{ label: "Select Export Source", value: "" }]
-    );
+  //       return prev;
+  //     },
+  //     [{ label: "Select Export Source", value: "" }]
+  //   );
 
-    console.log({ map, filter, reduce });
-  })();
+  //   console.log({ map, filter, reduce });
+  // })();
 
   // Source Options Handler
   const handleSelectSourceExports = ({ target: { value } }) => {
